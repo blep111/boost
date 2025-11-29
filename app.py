@@ -8,7 +8,7 @@ from config import FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, REDIRECT_URI
 from token_manager import add_token, get_token
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Replace with a secure key
+app.secret_key = 'ebc9973ecd508f7fae8d110e00b776077654ba7e17fc2149e66bdaa168580de5'  # Replace with a secure key
 oauth = OAuth(app)
 
 # Facebook OAuth setup
