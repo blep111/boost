@@ -3,13 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to Facebook</title>
+    <title>Flask Token Manager and URL Quote/Unquote</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to Facebook Automation Tool</h1>
-    <a href="{{ url_for('login') }}">
-        <button>Login with Facebook</button>
-    </a>
+    <div class="container">
+        <h1>URL Quote and Unquote</h1>
+
+        <!-- Form for URL-encoding (quoting) -->
+        <form method="POST" action="{{ url_for('quote_string') }}">
+            <label for="input_string">Enter string to URL-encode:</label>
+            <input type="text" name="input_string" id="input_string" required>
+            <button type="submit">Quote</button>
+        </form>
+
+        {% if quoted_string %}
+            <h2>Quoted String: </h2>
+            <p>{{ quoted_string }}</p>
+        {% endif %}
+
+        <!-- Form for URL-decoding (unquoting) -->
+        <form method="POST" action="{{ url_for('unquote_string') }}">
+            <label for="input_string">Enter string to URL-decode:</label>
+            <input type="text" name="input_string" id="input_string" required>
+            <button type="submit">Unquote</button>
+        </form>
+
+        {% if unquoted_string %}
+            <h2>Unquoted String: </h2>
+            <p>{{ unquoted_string }}</p>
+        {% endif %}
+
+        <!-- Form to manually set an access token -->
+        <form method="POST" action="{{ url_for('set_token') }}">
+            <h2>Set Access Token for Facebook</h2>
+            <input type="text" name="access_token" placeholder="Access Token" required>
+            <input type="number" name="expires_in" placeholder="Expires In (seconds)" required>
+            <button type="submit">Set Token</button>
+        </form>
+
+        <!-- Form to refresh an access token -->
+        <form method="POST" action="{{ url_for('refresh_token') }}">
+            <h2>Refresh Access Token for Facebook</h2>
+            <input type="text" name="access_token" placeholder="New Access Token" required>
+            <input type="number" name="expires_in" placeholder="Expires In (seconds)" required>
+            <button type="submit">Refresh Token</button>
+        </form>
+    </div>
 </body>
 </html>
